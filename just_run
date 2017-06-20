@@ -1,0 +1,35 @@
+#!/bin/sh
+#Location de ton systemC compiler
+SYSTEMC=/home/pookie/Documents/code/SystemC/sysclib
+#Type de linux
+TYPE=linux64
+#Nom de ton fichier
+NOMFICHIER=main
+
+#archive
+NOMARCHIVE=libsystemc-2.3.1.so
+ARCHI=${SYSTEMC}/lib-${TYPE}/${NOMARCHIVE}
+echo "Hello, voici tes settings :";
+echo "Location de ton systemC compiler = $(tput setaf 1) ${SYSTEMC}";
+echo "$(tput setaf 7)Nom de ton fichier = $(tput setaf 2) ${NOMFICHIER}$(tput setaf 7)";
+echo "Type de linux = $(tput setaf 3) ${TYPE}$(tput setaf 7) ";
+echo "\nAttention : Ce script a etait concu pour comiler un mini projet avec un seul .cpp utilisant systemc";
+export SYSTEMC;
+export TYPE;
+export NOMFICHIER;
+make
+if [ $? -eq 0 ]
+then
+    echo "Compilation a reussi\nOn vas faire une compile de l'archive et la ranger dans ce dossier maintenant"
+    echo "Nom de l'archive a importer = $(tput setaf 1) ${NOMARCHIVE}$(tput setaf 7)\nChemin = ${ARCHI}"
+    if [ ! -f "$NOMARCHIVE" ];
+    then
+            cp ${ARCHI} .
+    else
+            echo "Archive deja presente";
+    fi
+    chmod a+x sim
+    echo "Pour lancer le programme faite la commande : ./sim"
+else
+    echo "Erreur lors de la comilation ... sorry"
+fi
