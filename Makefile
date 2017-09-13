@@ -6,7 +6,7 @@ TYPE=linux64
 NOMFICHIER=main
 
 LDFLAGS=-L. -L$(SYSTEMC)/lib-$(TYPE)
-ENDLIBS=-lsystemc -lm
+ENDLIBS=-lsystemc -lm -lpthread
 CXXFLAGS=-Wall -g -std=c++11
 INCLUDES=-I. -I$(SYSTEMC)/include
 
